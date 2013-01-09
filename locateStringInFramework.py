@@ -33,6 +33,7 @@ def do_search(opts, args):
             print "Found symbols in " + p + " :"
             for s in symbols:
                 print "\t" + s
+            print "---------------\n"
 
 
 def get_lib_list(files, fileDir):
@@ -56,10 +57,10 @@ def find_symbols(path, searchTerm, caseInsensitive=False):
     for line in p.stdout.readlines():
         if caseInsensitive:
             if searchTerm.lower() in line.lower():
-                symbols.append(line)
+                symbols.append(line.rstrip('\n'))
         else:
             if searchTerm in line:
-                symbols.append(line)
+                symbols.append(line.rstrip('\n'))
     
     retval = p.wait()
     
